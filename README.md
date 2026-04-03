@@ -6,7 +6,7 @@
 
 **A production-grade expense splitting and group management platform** that simplifies shared finances with intelligent balance calculations and minimal settlements.
 
-[Live Demo](#) · [Report Bug](https://github.com/y-abhiram/Smart-Expense-Splitting-Platform/issues) · [Request Feature](https://github.com/y-abhiram/Smart-Expense-Splitting-Platform/issues)
+[Live Demo](#) · [Report Bug]([https://github.com/y-abhiram/Smart-Expense-Splitting-Platform/issues](https://github.com/y-abhiram/Smart-Expense-Splitting-Platform/blob/main/demo.webm)) · [Request Feature][(https://github.com/y-abhiram/Smart-Expense-Splitting-Platform/issues](https://github.com/y-abhiram/Smart-Expense-Splitting-Platform/blob/main/demo.webm))
 
 ---
 
