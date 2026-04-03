@@ -1,0 +1,36 @@
+# SplitMint - Requirements
+
+## Browser Requirements
+- Modern web browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+- JavaScript enabled
+- LocalStorage enabled
+- Cookies enabled
+
+## Backend Requirements
+- Supabase account (free tier available)
+- PostgreSQL database (provided by Supabase)
+- Supabase Project URL
+- Supabase anon public key
+
+## Development Server (choose one)
+- Python 3.x (recommended for quick local testing)
+  OR
+- Node.js 14+ with npx
+  OR
+- PHP 7.4+
+
+## Deployment Requirements (optional)
+- Git 2.x+
+- Node.js 14+ and npm (for Vercel/Netlify CLI)
+- Vercel CLI: npm install -g vercel
+  OR
+- Netlify CLI: npm install -g netlify-cli
+
+## External Dependencies (loaded via CDN)
+- Supabase JavaScript Client Library v2.x (https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2)
+
+## Notes
+- No build tools required
+- No package.json or npm dependencies
+- Zero-config deployment to any static hosting
+- Works on any platform (Windows, macOS, Linux)

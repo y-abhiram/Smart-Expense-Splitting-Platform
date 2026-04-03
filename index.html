@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SplitMint — Your Gateway to Karbon</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark">SM</div>
+        <div>
+          <div class="brand-title">SplitMint</div>
+          <div class="brand-sub">Your Gateway to Karbon</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="backendBtn" class="outline">Configure Backend</button>
+        <button id="logoutBtn" class="ghost" hidden>Logout</button>
+      </div>
+    </header>
+
+    <div id="backendBanner" class="banner" hidden>
+      <div>
+        <strong>Backend not configured.</strong>
+        Add Supabase credentials to enable real authentication + persistence.
+      </div>
+      <button id="bannerSetupBtn" class="outline">Set up</button>
+    </div>
+
+    <section id="backendPanel" class="panel backend-panel" hidden>
+      <div class="backend-header">
+        <div>
+          <h3>Supabase setup</h3>
+          <p class="muted">Paste your Project URL and anon public key to enable auth + persistence.</p>
+        </div>
+        <button type="button" id="backendCloseBtn" class="ghost">Close</button>
+      </div>
+      <form id="backendForm" class="backend-form">
+        <label>
+          Supabase URL
+          <input type="url" name="url" required placeholder="https://xyz.supabase.co" />
+        </label>
+        <label>
+          Anon public key
+          <textarea name="key" rows="3" required placeholder="ey..."></textarea>
+        </label>
+        <button type="submit">Save</button>
+        <p class="form-note">Find these in Supabase Project Settings → API.</p>
+      </form>
+    </section>
+
+    <main class="app-shell">
+      <section id="authView" class="panel auth-panel">
+        <h1>Welcome back</h1>
+        <p class="muted">Register or sign in to manage groups, expenses, and balances.</p>
+        <div class="auth-grid">
+          <form id="registerForm" class="card">
+            <h2>Create account</h2>
+            <label>
+              Name
+              <input type="text" name="name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" minlength="6" required />
+            </label>
+            <button type="submit">Register</button>
+            <p class="form-note" id="registerNote"></p>
+          </form>
+
+          <form id="loginForm" class="card">
+            <h2>Sign in</h2>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" required />
+            </label>
+            <button type="submit">Login</button>
+            <p class="form-note" id="loginNote"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="appView" class="app-grid" hidden>
+        <aside class="panel sidebar">
+          <div class="sidebar-top">
+            <h2>Groups</h2>
+            <button id="newGroupBtn" class="outline">New group</button>
+          </div>
+          <div id="groupList" class="group-list"></div>
+          <div class="sidebar-footer">
+            <div class="muted" id="userSummary"></div>
+          </div>
+        </aside>
+
+        <section class="panel content">
+          <div id="emptyState" class="empty-state">
+            <h2>Create your first group</h2>
+            <p>SplitMint keeps totals, balances, and settlement suggestions in one view.</p>
+            <button id="emptyNewGroupBtn">Create group</button>
+          </div>
+
+          <div id="groupView" hidden>
+            <div class="group-header">
+              <div>
+                <h2 id="groupTitle"></h2>
+                <p class="muted" id="groupMeta"></p>
+              </div>
+              <div class="group-actions">
+                <button id="exportBtn" class="outline">Export CSV</button>
+                <button id="editGroupBtn" class="ghost">Edit group</button>
+                <button id="deleteGroupBtn" class="danger">Delete group</button>
+              </div>
+            </div>
+
+            <section class="cards" id="summaryCards"></section>
+
+            <section class="split-grid">
+              <div class="card">
+                <div class="card-header">
+                  <h3>Participants</h3>
+                  <button id="addParticipantBtn" class="outline">Add participant</button>
+                </div>
+                <div id="participantList" class="participant-list"></div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <h3>MintSense</h3>
+                </div>
+                <p class="muted">Convert natural language into a structured expense.</p>
+                <textarea id="mintSenseInput" rows="4" placeholder="E.g. Paid 1200 for dinner with Alex and Priya on 2026-04-02"></textarea>
+                <button id="mintSenseBtn">Convert to expense</button>
+                <p class="form-note" id="mintSenseNote"></p>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-header">
+                <h3>Expenses & Filters</h3>
+                <button id="addExpenseBtn" class="outline">Add expense</button>
+              </div>
+              <div class="filters">
+                <input id="searchInput" type="search" placeholder="Search description" />
+                <select id="participantFilter"></select>
+                <input id="dateFrom" type="date" />
+                <input id="dateTo" type="date" />
+                <input id="amountMin" type="number" placeholder="Min" min="0" step="0.01" />
+                <input id="amountMax" type="number" placeholder="Max" min="0" step="0.01" />
+                <button id="clearFilters" class="ghost">Clear</button>
+              </div>
+              <div id="expenseList" class="expense-list"></div>
+            </section>
+
+            <section class="split-grid">
+              <div class="card">
+                <h3>Balances</h3>
+                <div id="balanceTable" class="balance-table"></div>
+              </div>
+              <div class="card">
+                <h3>Settlement Suggestions</h3>
+                <div id="settlementList" class="settlement-list"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle"></h3>
+          <button id="modalClose" class="ghost">Close</button>
+        </div>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <script>
+      // Immediately hide loading overlay on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('loadingOverlay');
+        if (overlay) overlay.hidden = true;
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
